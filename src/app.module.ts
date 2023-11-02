@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { ClientModule } from './client/client.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { ProductModule } from './product/product.module';
+import { InstructionModule } from './instruction/instruction.module';
+import { AnswerModule } from './answer/answer.module';
 
 @Module({
   imports: [
@@ -23,7 +25,9 @@ import { ProductModule } from './product/product.module';
     }),
     ClientModule,
     SupplierModule,
-    ProductModule
+    ProductModule,
+    InstructionModule,
+    AnswerModule
   ],
   controllers: [AppController],
   providers: [AppService],

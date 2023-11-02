@@ -1,8 +1,10 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
+
 
 datasource db {
   provider = "mysql"
@@ -44,6 +46,35 @@ model Document {
   updatedAt   DateTime @updatedAt
 
   @@map("documents")
+}
+
+model Instruction {
+  id Int @id @default(autoincrement())
+  description String
+  answers Answer[]
+  boot Boot?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt  
+  @@map("instructions")
+}
+
+model Answer {
+  id Int @id @default(autoincrement())
+  answer String
+  Instruction Instruction  @relation(fields: [instructionId], references: [id])
+  instructionId Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt 
+  @@map("answers")
+}
+
+model Boot {
+  id Int @id @default(autoincrement())
+  name String
+  Instruction Instruction  @relation(fields: [instructionId], references: [id])
+  instructionId Int @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt 
 }
 
 model Client {
